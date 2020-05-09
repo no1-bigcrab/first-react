@@ -7,10 +7,10 @@ class ProductComponent extends Component {
     //     this.onAddToCard = this.onAddToCard.bind(this);
     // }
 
-    // onAddToCard(text){
-    //     console.log(text);
-    //     alert(this.props.children + '-' +this.props.price + 'VND');
-    // }
+    onAddToCard(text){
+        //console.log(text);
+        alert(this.props.children + '-' +this.props.price + 'VND');
+    }
     onAddToCard2 = () => {
             //console.log(text);
             alert(this.props.children + '-' +this.props.price + 'VND');
