@@ -8,7 +8,8 @@ class  App extends Component {
   constructor(props){
       super(props);
       this.state = {
-          tasks :[]
+          tasks :[],
+          isDisplayForm: false
       }
   }
 
@@ -57,8 +58,22 @@ class  App extends Component {
     return this.S4() + this.S4() + '-' + this.S4()+ '-' + this.S4()+ '-' + this.S4()+ '-' + this.S4()+ this.S4()+ this.S4();
   }
 
+  onToggleFrom = () => {
+    this.setState({
+      isDisplayForm: !this.state.isDisplayForm
+    })
+  }
+
+  onCloseForm = () =>{
+    this.setState({
+      isDisplayForm: false
+    })
+  }
+  
   render(){
-    var {tasks} = this.state;
+    var { tasks, isDisplayForm } = this.state;
+    var elmTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm}/> :'';
+
     return (
         <div className="container">
             <div className="text-center">
@@ -66,12 +81,12 @@ class  App extends Component {
                 <hr/>
             </div>
               <div className="row">
-                <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div className={isDisplayForm === true?'col-xs-4 col-sm-4 col-md-4 col-lg-4':''}>
                     {/*  */}
-                    <TaskForm/>
+                    { elmTaskForm }
                 </div>
-                <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    <button type="button" className="btn btn-primary">
+                <div className={ isDisplayForm === true?'col-xs-8 col-sm-8 col-md-8 col-lg-8':'col-xs-12 col-sm-12 col-md-12 col-lg-12' }>
+                    <button type="button" className="btn btn-primary" onClick={this.onToggleFrom}>
                         <span className="fa fa-plus mr-5"></span>Thêm Công Việc
                     </button>
                     <button type="button" className="btn btn-danger ml-5" onClick={this.onGeneratorData}>
