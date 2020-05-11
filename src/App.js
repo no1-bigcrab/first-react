@@ -69,10 +69,21 @@ class  App extends Component {
       isDisplayForm: false
     })
   }
-  
+
+  onSubmit = (data) => {
+    var { tasks } = this.state;
+      
+    data.id = this.generateId();
+    tasks.push(data);
+    this.setState({
+      tasks: tasks
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
   render(){
     var { tasks, isDisplayForm } = this.state;
-    var elmTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm}/> :'';
+    var elmTaskForm = isDisplayForm ? <TaskForm onSubmit={this.onSubmit} onCloseForm={this.onCloseForm}/> :'';
 
     return (
         <div className="container">
