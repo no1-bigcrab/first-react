@@ -24,31 +24,6 @@ class  App extends Component {
     }
   }
 
-  onGeneratorData = () => {
-    var tasks =[
-        {
-          id: this.generateId(),
-          name: 'Học lập trình',
-          status: true
-        },
-        {
-          id: this.generateId(),
-          name: 'Học Kinh tế',
-          status: false
-        },
-        {
-          id: this.generateId(),
-          name: 'Học coong nghệ thông tin',
-          status: true
-        }
-    ];
-
-    this.setState({
-      tasks : tasks
-    });
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }
 
   S4(){
     return Math.floor(( 1+Math.random() )* 0x10000).toString(16).substring(1);
@@ -81,6 +56,47 @@ class  App extends Component {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 
+  onUpdateStatus =(id)=>{
+    var { tasks } = this.state;
+
+    var index = this.findIndex(id);
+    if ( index !== -1 ) {
+      tasks[index].status = !tasks[index].status;
+
+      this.setState({
+        tasks: tasks
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+    
+
+  }
+
+  findIndex = (id) => {
+      var { tasks } = this.state;
+      var result = -1;
+      tasks.forEach( (task, index) => {
+          if (task.id === id) {
+            result = index;
+          }
+      });
+
+      return result;
+  }
+
+  onDelete = (id) =>{
+    var { tasks } = this.state;
+
+    var index = this.findIndex(id);
+    if ( index !== -1 ) {
+      tasks.splice(index, 1);
+
+      this.setState({
+        tasks: tasks
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  }
   render(){
     var { tasks, isDisplayForm } = this.state;
     var elmTaskForm = isDisplayForm ? <TaskForm onSubmit={this.onSubmit} onCloseForm={this.onCloseForm}/> :'';
@@ -100,16 +116,16 @@ class  App extends Component {
                     <button type="button" className="btn btn-primary" onClick={this.onToggleFrom}>
                         <span className="fa fa-plus mr-5"></span>Thêm Công Việc
                     </button>
-                    <button type="button" className="btn btn-danger ml-5" onClick={this.onGeneratorData}>
-                        Gennerate Data
-                    </button>
-
                     {/* search and soft */}
                       <Control />
                     {/* {List danh sách} */}
                     <div className="row mt-15">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <TaskList tasks={tasks}/>
+                          <TaskList 
+                              tasks={tasks} 
+                              onUpdateStatus={ this.onUpdateStatus }
+                              onDelete={ this.onDelete }
+                          />
                         </div>
                     </div>
                   
