@@ -7,7 +7,7 @@ class  Control extends Component {
         return (
             <div className="row mt-15">
             {/* search */}
-               <SearchControl />
+               <SearchControl onSearch={this.props.onSearch} />
                 {/* soft */}
                 <SoftControl />
             </div>

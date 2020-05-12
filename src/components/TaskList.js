@@ -25,7 +25,7 @@ class  TaskList extends Component {
     }
   render(){
       var { tasks } = this.props;
-      var { filterName, filterStatus } = this.state;
+      var { filterName } = this.state;
       var elementTask = tasks.map((task, index)=>{
           return <TaskItem 
                     key={task.id} 
@@ -70,9 +70,9 @@ class  TaskList extends Component {
                                         name="filterStatus"
                                         value={filterName}
                                         onChange={ this.onChange }
-                                >
-                                    <option value="-1">Tất Cả</option>
-                                    <option value="0">Ẩn</option>
+                                > <option>Lựa chọn</option>
+                                    <option value="0">Tất Cả</option>
+                                    <option value="-1">Ẩn</option>
                                     <option value="1">Kích Hoạt</option>
                                 </select>
                             </td>
