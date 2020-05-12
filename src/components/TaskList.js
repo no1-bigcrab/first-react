@@ -15,6 +15,9 @@ class  TaskList extends Component {
                     onDelete={
                         this.props.onDelete
                     }
+                    onUpdate={
+                        this.props.onUpdate
+                    }
                 />;
       });
         return (
