@@ -22,7 +22,6 @@ class  SearchControl extends Component {
     this.props.onSearch(this.state.keyword);
   }
   render(){
-    var { keyword } = this.state;
         return (
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div className="input-group">

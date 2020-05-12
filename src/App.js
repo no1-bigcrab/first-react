@@ -3,8 +3,8 @@ import './App.css';
 import TaskForm from './components/TaskForm';
 import Control from './components/Control';
 import TaskList from './components/TaskList';
-
-class  App extends Component {
+import _ from 'lodash';
+ class  App extends Component {
   constructor(props){
       super(props);
       this.state = {
@@ -15,7 +15,11 @@ class  App extends Component {
             name : '',
             status :-1
           },
-          keyword: ''
+          keyword: '',
+          soft: {
+            by: '',
+            value: 1
+          }
       }
   }
 
